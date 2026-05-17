@@ -2,727 +2,301 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>GB Food — Marketing Gastronômico</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --red: #D42B1E;
-    --red-bright: #FF3322;
-    --red-dim: #8B1A12;
-    --black: #080808;
-    --dark: #110808;
-    --card: #140a0a;
-    --white: #F5F0EE;
-    --muted: #8A7070;
-    --border: rgba(212,43,30,0.22);
-  }
+:root {
+  --red:        #D42B1E;
+  --red-bright: #FF3322;
+  --red-dim:    #8B1A12;
+  --black:      #080808;
+  --dark:       #110808;
+  --card:       #130909;
+  --white:      #F5F0EE;
+  --muted:      #7A6060;
+  --border:     rgba(212,43,30,0.20);
+  --px:         1.25rem;
+  --section-py: 3.5rem;
+  --radius:     3px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9000; opacity: 0.35;
+}
+a { color: inherit; }
+.container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 var(--px); }
+.label { display: block; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); margin-bottom: 0.75rem; }
+.title { font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; }
+.title strong { font-weight: 800; }
+.title .accent { color: var(--red); }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* BUTTONS */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.95rem 1.8rem; font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: var(--radius); border: none; cursor: pointer; transition: all 0.22s ease; white-space: nowrap; }
+.btn-red { background: var(--red); color: var(--white); }
+.btn-red:hover, .btn-red:active { background: var(--red-bright); transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.22); }
+.btn-outline:hover, .btn-outline:active { border-color: var(--red); }
+.btn-full { width: 100%; }
+.btn-xl { padding: 1.15rem 2.2rem; font-size: 0.78rem; }
 
-  html { scroll-behavior: smooth; }
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1rem var(--px); background: linear-gradient(to bottom, rgba(8,8,8,0.97), transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding-top: max(1rem, env(safe-area-inset-top)); }
+.nav-logo { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.02em; line-height: 1; }
+.nav-logo .food { color: var(--red); font-weight: 300; }
+.nav-links { display: none; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { text-decoration: none; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-cta-link { background: var(--red) !important; color: var(--white) !important; padding: 0.55rem 1.2rem; border-radius: var(--radius); font-weight: 700 !important; }
+.nav-cta-link:hover { background: var(--red-bright) !important; }
+.nav-pill { background: var(--red); color: var(--white); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; padding: 0.5rem 1rem; border-radius: var(--radius); white-space: nowrap; }
 
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
+/* HERO */
+.hero { min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 7rem var(--px) 4rem; position: relative; overflow: hidden; }
+.hero-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 65% at 50% 40%, rgba(175,22,10,0.55), transparent 68%); pointer-events: none; }
+.hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(212,43,30,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(212,43,30,0.07) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; mask-image: radial-gradient(ellipse 85% 85% at center, black 20%, transparent 72%); }
+.hero-inner { position: relative; z-index: 1; max-width: 560px; }
+.hero-badge { display: inline-block; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); border: 1px solid var(--border); padding: 0.38rem 0.9rem; border-radius: 1px; margin-bottom: 1.6rem; animation: fadeUp 0.8s ease both; }
+.hero-title { font-size: clamp(3rem, 13vw, 6rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 1rem; animation: fadeUp 0.8s 0.1s ease both; }
+.hero-title strong { font-weight: 800; }
+.hero-title .accent { color: var(--red); }
+.hero-sub { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2.2rem; animation: fadeUp 0.8s 0.2s ease both; }
+.hero-btns { display: flex; flex-direction: column; gap: 0.75rem; animation: fadeUp 0.8s 0.3s ease both; }
+.hero-scroll { position: absolute; bottom: 1.8rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; animation: fadeIn 1s 0.9s ease both; }
+.scroll-bar { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--red), transparent); animation: pulse 1.8s ease infinite; }
 
-  /* ── NOISE TEXTURE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.4;
-  }
+/* NUMBERS */
+.numbers { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: grid; grid-template-columns: repeat(3, 1fr); }
+.num-item { padding: 1.6rem 0.75rem; text-align: center; border-right: 1px solid var(--border); position: relative; overflow: hidden; }
+.num-item:last-child { border-right: none; }
+.num-val { display: block; font-size: clamp(1.5rem, 5.5vw, 2.4rem); font-weight: 800; color: var(--red); letter-spacing: -0.02em; line-height: 1; }
+.num-label { display: block; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 0.35rem; line-height: 1.4; }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.4rem 3rem;
-    background: linear-gradient(to bottom, rgba(8,8,8,0.95) 0%, transparent 100%);
-    backdrop-filter: blur(4px);
-  }
+/* MÉTODO */
+.method { background: var(--dark); padding: var(--section-py) 0; }
+.method-title-block { margin-bottom: 2rem; }
+.method-title-block .title { font-size: clamp(2.2rem, 9vw, 4rem); }
+.steps { border-top: 1px solid var(--border); }
+.step { display: grid; grid-template-columns: 52px 1fr; gap: 1rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); align-items: start; }
+.step-num { font-size: 2.2rem; font-weight: 800; color: var(--red-dim); line-height: 1; transition: color 0.25s; }
+.step:hover .step-num { color: var(--red); }
+.step-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.step-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
 
-  .nav-logo {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-    font-size: 1.25rem;
-    letter-spacing: 0.02em;
-  }
-  .nav-logo .light { font-weight: 300; }
-  .nav-logo span { color: var(--red); }
+/* SERVIÇOS */
+.services { background: var(--black); padding: var(--section-py) 0; }
+.services-title { margin-bottom: 2rem; }
+.services-title .title { font-size: clamp(2.2rem, 9vw, 4rem); }
+.service-cards { display: flex; flex-direction: column; gap: 1rem; }
+.service-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem 1.5rem; position: relative; overflow: hidden; transition: border-color 0.3s; }
+.service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--red), transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.5s; }
+.service-card:active::before, .service-card:hover::before { transform: scaleX(1); }
+.service-card:hover { border-color: rgba(212,43,30,0.4); }
+.service-num { font-size: 3.5rem; font-weight: 800; color: rgba(212,43,30,0.12); line-height: 1; margin-bottom: 0.5rem; letter-spacing: -0.03em; }
+.service-name { font-size: clamp(1.8rem, 6vw, 2.4rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 0.9rem; }
+.service-name .accent { color: var(--red); font-weight: 800; }
+.service-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.2rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.tag { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: 0.28rem 0.65rem; border-radius: 1px; transition: all 0.2s; }
 
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-  .nav-links a {
-    text-decoration: none;
-    color: var(--muted);
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--white); }
+/* RESULTADOS */
+.results { background: var(--dark); padding: var(--section-py) 0; }
+.results-title { margin-bottom: 0.9rem; }
+.results-title .title { font-size: clamp(2.2rem, 9vw, 4rem); }
+.results-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
+.bars { display: flex; flex-direction: column; gap: 1.2rem; }
+.bar-row { display: flex; flex-direction: column; gap: 0.4rem; }
+.bar-meta { display: flex; justify-content: space-between; align-items: baseline; }
+.bar-lbl { font-size: 0.78rem; color: var(--muted); }
+.bar-pct { font-size: 0.78rem; font-weight: 700; color: var(--red); }
+.bar-track { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+.bar-fill { height: 100%; background: linear-gradient(90deg, var(--red-dim), var(--red)); border-radius: 2px; transform-origin: left; animation: barGrow 1.2s ease both; }
 
-  .nav-cta {
-    background: var(--red);
-    color: var(--white) !important;
-    padding: 0.6rem 1.4rem;
-    border-radius: 2px;
-    font-weight: 600 !important;
-    color: var(--white) !important;
-  }
-  .nav-cta:hover { background: var(--red-bright); color: var(--white) !important; }
+/* CTA */
+.cta-final { background: var(--black); padding: 4rem var(--px) 3.5rem; text-align: center; position: relative; overflow: hidden; }
+.cta-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 75% 70% at 50% 65%, rgba(165,18,8,0.42), transparent 70%); pointer-events: none; }
+.cta-inner { position: relative; z-index: 1; max-width: 520px; margin: 0 auto; }
+.cta-badge { display: inline-block; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); border: 1px solid var(--border); background: rgba(212,43,30,0.1); padding: 0.4rem 0.9rem; margin-bottom: 1.2rem; border-radius: 1px; }
+.cta-pre { font-size: clamp(1.6rem, 7vw, 3rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.1; }
+.cta-pre strong { font-weight: 800; }
+.cta-value { display: block; font-size: clamp(3.5rem, 18vw, 8rem); font-weight: 800; color: var(--red); letter-spacing: -0.03em; line-height: 0.9; margin-bottom: 1.3rem; }
+.cta-sub { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
+.cta-btns { display: flex; flex-direction: column; gap: 0.75rem; }
+.cta-hint { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em; margin-top: 0.75rem; }
+.cta-hint strong { color: var(--white); }
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    position: relative;
-    overflow: hidden;
-    padding: 8rem 3rem 4rem;
-  }
+/* FOOTER */
+footer { border-top: 1px solid var(--border); background: var(--dark); padding: 2rem var(--px); padding-bottom: max(2rem, env(safe-area-inset-bottom)); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center; }
+.footer-logo { font-size: 1rem; font-weight: 800; }
+.footer-logo .food { color: var(--red); font-weight: 300; }
+.footer-copy, .footer-tag { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
 
-  .hero-glow {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(180,25,12,0.55) 0%, transparent 70%);
-    pointer-events: none;
-  }
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+@keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-  .hero-lines {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(212,43,30,0.09) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(212,43,30,0.09) 1px, transparent 1px);
-    background-size: 80px 80px;
-    pointer-events: none;
-    mask-image: radial-gradient(ellipse 80% 80% at center, black 30%, transparent 75%);
-  }
+/* METHOD VISUAL (desktop) */
+.method-visual { display: none; position: relative; height: 380px; align-items: center; justify-content: center; }
+.mc { position: absolute; border: 1px solid var(--border); border-radius: 50%; }
+.mc-1 { width: 280px; height: 280px; animation: spin 18s linear infinite; }
+.mc-1 .dot { width: 10px; height: 10px; background: var(--red); border-radius: 50%; position: absolute; top: -5px; left: 50%; transform: translateX(-50%); }
+.mc-2 { width: 200px; height: 200px; border-color: rgba(212,43,30,0.3); animation: spin 12s linear infinite reverse; }
+.mc-2 .dot { width: 8px; height: 8px; background: var(--red-dim); border-radius: 50%; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); }
+.mc-core { position: relative; z-index: 2; width: 120px; height: 120px; background: radial-gradient(circle, rgba(212,43,30,0.5), rgba(212,43,30,0.1)); border-radius: 50%; border: 1px solid var(--red); display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800; letter-spacing: 0.08em; text-align: center; line-height: 1.2; }
 
-  .hero-content {
-    position: relative;
-    text-align: center;
-    max-width: 860px;
-  }
+/* TABLET 640px+ */
+@media (min-width: 640px) {
+  :root { --px: 2rem; }
+  .hero-btns { flex-direction: row; justify-content: center; }
+  .num-item { padding: 2rem 1rem; }
+  .service-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .service-cards .service-card:nth-child(3) { grid-column: 1 / -1; }
+  .results-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+}
 
-  .hero-eyebrow {
-    display: inline-block;
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 1.8rem;
-    border: 1px solid var(--border);
-    padding: 0.4rem 1rem;
-    border-radius: 1px;
-  }
+/* DESKTOP 1024px+ */
+@media (min-width: 1024px) {
+  :root { --px: 2.5rem; --section-py: 5.5rem; }
+  .nav-pill { display: none; }
+  .nav-links { display: flex; }
+  .hero { padding: 8rem var(--px) 5rem; }
+  .hero-inner { max-width: 800px; }
+  .hero-title { font-size: clamp(4.5rem, 9vw, 7.5rem); }
+  .hero-btns { flex-direction: row; justify-content: center; }
+  .method-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .method-visual { display: flex; }
+  .service-cards { grid-template-columns: repeat(3, 1fr); }
+  .service-cards .service-card:nth-child(3) { grid-column: auto; }
+  .results-inner { gap: 5rem; }
+  footer { flex-direction: row; justify-content: space-between; text-align: left; }
+}
 
-  .hero-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(3.5rem, 11vw, 8.5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.2rem;
-    animation: fadeUp 0.9s ease both;
-  }
-  .hero-title strong { font-weight: 800; }
-
-  .hero-title .red { color: var(--red); }
-
-  .hero-sub {
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    color: var(--muted);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 3rem;
-    animation: fadeUp 0.9s 0.15s ease both;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    animation: fadeUp 0.9s 0.3s ease both;
-  }
-
-  .btn-primary {
-    background: var(--red);
-    color: var(--white);
-    padding: 1rem 2.4rem;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .btn-primary:hover { background: var(--red-bright); transform: translateY(-2px); }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--white);
-    padding: 1rem 2.4rem;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 2px;
-    border: 1px solid rgba(255,255,255,0.2);
-    cursor: pointer;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .btn-ghost:hover { border-color: var(--red); transform: translateY(-2px); }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--muted);
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    animation: fadeIn 1.2s 0.8s ease both;
-  }
-  .scroll-line {
-    width: 1px;
-    height: 48px;
-    background: linear-gradient(to bottom, var(--red), transparent);
-    animation: scrollPulse 1.8s ease infinite;
-  }
-
-  /* ── NUMBERS BAR ── */
-  .numbers-bar {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    text-align: center;
-    background: var(--card);
-  }
-  .number-item {
-    padding: 2.2rem 1rem;
-    border-right: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-  .number-item:last-child { border-right: none; }
-  .number-item::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(212,43,30,0.18), transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-  .number-item:hover::before { opacity: 1; }
-  .number-big {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: 800;
-    color: var(--red);
-    line-height: 1;
-    display: block;
-    letter-spacing: -0.02em;
-  }
-  .number-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 0.3rem;
-  }
-
-  /* ── SECTION COMMONS ── */
-  section { padding: 6rem 3rem; }
-  .section-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 1rem;
-  }
-  .section-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(2.8rem, 7vw, 5rem);
-    font-weight: 300;
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-  }
-  .section-title strong { font-weight: 800; }
-  .section-title .red { color: var(--red); }
-  .container { max-width: 1140px; margin: 0 auto; }
-
-  /* ── MÉTODO ── */
-  .method { background: var(--dark); }
-  .method-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .steps { display: flex; flex-direction: column; gap: 0; }
-  .step {
-    display: grid;
-    grid-template-columns: 64px 1fr;
-    gap: 1.5rem;
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--border);
-    transition: background 0.3s;
-    position: relative;
-  }
-  .step:first-child { border-top: 1px solid var(--border); }
-  .step-num {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 3rem;
-    font-weight: 800;
-    color: var(--red-dim);
-    line-height: 1;
-    transition: color 0.3s;
-  }
-  .step:hover .step-num { color: var(--red); }
-  .step-body h3 {
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-  .step-body p {
-    font-size: 0.92rem;
-    color: var(--muted);
-    line-height: 1.65;
-  }
-
-  .method-visual {
-    position: relative;
-    height: 420px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .method-circle {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    position: absolute;
-    animation: rotateSlow 18s linear infinite;
-  }
-  .method-circle-2 {
-    width: 220px;
-    height: 220px;
-    border-color: rgba(192,57,43,0.3);
-    animation-duration: 12s;
-    animation-direction: reverse;
-  }
-  .method-core {
-    width: 130px;
-    height: 130px;
-    background: radial-gradient(circle, rgba(212,43,30,0.6), rgba(212,43,30,0.12));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-    border: 1px solid var(--red);
-  }
-  .method-core-text {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.1rem;
-    letter-spacing: 0.1em;
-    text-align: center;
-    line-height: 1.2;
-  }
-  .orbit-dot {
-    width: 10px;
-    height: 10px;
-    background: var(--red);
-    border-radius: 50%;
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  /* ── SERVIÇOS ── */
-  .services { background: var(--black); }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3.5rem;
-  }
-  .service-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 2.5rem 2rem;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s;
-    cursor: default;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--red), transparent);
-    transform: scaleX(0);
-    transition: transform 0.5s;
-  }
-  .service-card:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-4px); }
-  .service-card:hover::before { transform: scaleX(1); }
-  .service-num {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 4rem;
-    color: rgba(192,57,43,0.15);
-    line-height: 1;
-    margin-bottom: 1rem;
-  }
-  .service-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 300;
-    line-height: 1.05;
-    margin-bottom: 0.3rem;
-    letter-spacing: -0.02em;
-  }
-  .service-title .red { font-weight: 800; }
-  .service-title .red { color: var(--red); }
-  .service-desc {
-    font-size: 0.87rem;
-    color: var(--muted);
-    line-height: 1.7;
-    margin: 1rem 0 1.5rem;
-  }
-  .service-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  .tag {
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-weight: 600;
-    border: 1px solid var(--border);
-    padding: 0.3rem 0.7rem;
-    border-radius: 1px;
-    color: var(--muted);
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .tag:hover { border-color: var(--red); color: var(--white); }
-
-  /* ── METRICS ── */
-  .metrics {
-    background: var(--dark);
-    padding: 6rem 3rem;
-  }
-  .metrics-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-  }
-  .metrics-text .section-title { margin-bottom: 1.2rem; }
-  .metrics-text p {
-    font-size: 1rem;
-    color: var(--muted);
-    line-height: 1.8;
-    max-width: 440px;
-  }
-  .bars { display: flex; flex-direction: column; gap: 1.4rem; margin-top: 2rem; }
-  .bar-row { display: grid; grid-template-columns: 110px 1fr 40px; gap: 1rem; align-items: center; }
-  .bar-label { font-size: 0.82rem; color: var(--muted); text-align: right; }
-  .bar-track {
-    height: 4px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--red-dim), var(--red));
-    border-radius: 2px;
-    transform-origin: left;
-    animation: barGrow 1.2s ease both;
-  }
-  .bar-pct { font-size: 0.78rem; color: var(--red); font-weight: 600; }
-
-  /* ── CTA ── */
-  .cta-section {
-    background: var(--black);
-    text-align: center;
-    padding: 8rem 3rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .cta-glow {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 70% at 50% 60%, rgba(180,25,12,0.45), transparent 70%);
-    pointer-events: none;
-  }
-  .cta-badge {
-    display: inline-block;
-    background: rgba(192,57,43,0.15);
-    border: 1px solid var(--border);
-    color: var(--red);
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 0.5rem 1.2rem;
-    margin-bottom: 2rem;
-    border-radius: 1px;
-  }
-  .cta-section .section-title {
-    font-size: clamp(3rem, 9vw, 7rem);
-    max-width: 700px;
-    margin: 0 auto 0.5rem;
-  }
-  .cta-value {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(4rem, 12vw, 9rem);
-    font-weight: 800;
-    color: var(--red);
-    line-height: 0.9;
-    letter-spacing: -0.03em;
-    display: block;
-    margin-bottom: 1.5rem;
-  }
-  .cta-sub {
-    font-size: 1.05rem;
-    color: var(--muted);
-    max-width: 480px;
-    margin: 0 auto 3rem;
-    line-height: 1.7;
-  }
-  .cta-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.9rem;
-  }
-  .btn-big {
-    background: var(--red);
-    color: var(--white);
-    padding: 1.3rem 3.5rem;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 0 40px rgba(212,43,30,0.4);
-  }
-  .btn-big:hover {
-    background: var(--red-bright);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 50px rgba(212,43,30,0.6);
-  }
-  .cta-hint {
-    font-size: 0.78rem;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-  }
-  .cta-hint strong { color: var(--white); }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2.5rem 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--dark);
-  }
-  .footer-logo { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; }
-  .footer-logo span { color: var(--red); }
-  .footer-copy { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; }
-  .footer-tagline { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(28px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  @keyframes rotateSlow {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(1); }
-    50% { opacity: 1; transform: scaleY(1.2); }
-  }
-  @keyframes barGrow {
-    from { transform: scaleX(0); }
-    to   { transform: scaleX(1); }
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 860px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
-    section { padding: 4rem 1.5rem; }
-    .method-grid, .metrics-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .services-grid { grid-template-columns: 1fr; }
-    .numbers-bar { grid-template-columns: 1fr; }
-    .number-item { border-right: none; border-bottom: 1px solid var(--border); }
-    .method-visual { display: none; }
-    footer { flex-direction: column; gap: 0.8rem; text-align: center; }
-    .hero { padding: 7rem 1.5rem 3rem; }
-  }
+/* TOUCH: disable hover transforms */
+@media (hover: none) {
+  .btn-red:hover, .btn-outline:hover { transform: none; }
+  .btn-red:active { background: var(--red-bright); transform: scale(0.97); }
+  .btn-outline:active { border-color: var(--red); }
+  .service-card:hover { border-color: var(--border); }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">GB <span class="light" style="color:var(--red);font-weight:300">Food</span></div>
+  <div class="nav-logo">GB <span class="food">Food</span></div>
+  <a href="#contato" class="nav-pill">Falar agora</a>
   <ul class="nav-links">
     <li><a href="#metodo">Método</a></li>
     <li><a href="#servicos">Serviços</a></li>
     <li><a href="#resultados">Resultados</a></li>
-    <li><a href="#contato" class="nav-cta">Fale conosco</a></li>
+    <li><a href="#contato" class="nav-cta-link">Fale conosco</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
+<section class="hero" id="inicio">
   <div class="hero-glow"></div>
-  <div class="hero-lines"></div>
-  <div class="hero-content">
-    <span class="hero-eyebrow">Agência especialista em food marketing</span>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <span class="hero-badge">Agência especialista em food marketing</span>
     <h1 class="hero-title">
-      Marketing<br><span class="red"><strong>Gastronômico</strong></span>
+      Marketing<br>
+      <span class="accent"><strong>Gastronômico</strong></span>
     </h1>
     <p class="hero-sub">Mais clientes · Mais previsibilidade · Mais lucro</p>
-    <div class="hero-actions">
-      <a href="#contato" class="btn-primary">Fale com a GB Food</a>
-      <a href="#servicos" class="btn-ghost">Conhecer serviços</a>
+    <div class="hero-btns">
+      <a href="#contato" class="btn btn-red btn-xl btn-full">Fale com a GB Food</a>
+      <a href="#servicos" class="btn btn-outline btn-xl btn-full">Ver serviços</a>
     </div>
   </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    Scroll
-  </div>
+  <div class="hero-scroll"><div class="scroll-bar"></div>scroll</div>
 </section>
 
-<!-- NUMBERS -->
-<div class="numbers-bar">
-  <div class="number-item">
-    <span class="number-big">R$70K+</span>
-    <span class="number-label">Faturamento mínimo atendido</span>
+<div class="numbers">
+  <div class="num-item">
+    <span class="num-val">R$70K+</span>
+    <span class="num-label">Faturamento<br>mínimo atendido</span>
   </div>
-  <div class="number-item">
-    <span class="number-big">3x</span>
-    <span class="number-label">Pilares de crescimento</span>
+  <div class="num-item">
+    <span class="num-val">3x</span>
+    <span class="num-label">Pilares de<br>crescimento</span>
   </div>
-  <div class="number-item">
-    <span class="number-big">100%</span>
-    <span class="number-label">Foco no setor gastronômico</span>
+  <div class="num-item">
+    <span class="num-val">100%</span>
+    <span class="num-label">Foco<br>gastronômico</span>
   </div>
 </div>
 
-<!-- MÉTODO -->
 <section class="method" id="metodo">
   <div class="container">
-    <div class="method-grid">
+    <div class="method-inner">
       <div>
-        <p class="section-label">O Método GB Food</p>
-        <h2 class="section-title">A <span class="red"><strong>estratégia</strong></span><br>por trás</h2>
+        <span class="label">O Método GB Food</span>
+        <div class="method-title-block">
+          <h2 class="title">A <span class="accent"><strong>estratégia</strong></span><br>por trás</h2>
+        </div>
         <div class="steps">
           <div class="step">
             <span class="step-num">01</span>
-            <div class="step-body">
-              <h3>Aquisição</h3>
-              <p>Seu produto se torna conhecido através de vídeos food porn que atraem clientes em grande potencial.</p>
+            <div>
+              <div class="step-title">Aquisição</div>
+              <p class="step-desc">Seu produto se torna conhecido através de vídeos food porn que atraem clientes de alto potencial.</p>
             </div>
           </div>
           <div class="step">
             <span class="step-num">02</span>
-            <div class="step-body">
-              <h3>Conversão</h3>
-              <p>Agora que geramos interesse, vamos transformar o desejo em venda com estratégias precisas.</p>
+            <div>
+              <div class="step-title">Conversão</div>
+              <p class="step-desc">Agora que geramos interesse, transformamos o desejo em venda com estratégias precisas.</p>
             </div>
           </div>
           <div class="step">
             <span class="step-num">03</span>
-            <div class="step-body">
-              <h3>Retenção</h3>
-              <p>Depois de conquistar um novo cliente, é preciso manter a recompra e gerar recorrência real.</p>
+            <div>
+              <div class="step-title">Retenção</div>
+              <p class="step-desc">Depois de conquistar um novo cliente, mantemos a recompra e geramos recorrência real.</p>
             </div>
           </div>
         </div>
       </div>
       <div class="method-visual">
-        <div class="method-circle">
-          <div class="orbit-dot"></div>
-        </div>
-        <div class="method-circle method-circle-2">
-          <div class="orbit-dot" style="top:auto;bottom:-5px;"></div>
-        </div>
-        <div class="method-core">
-          <div class="method-core-text">GB<br>FOOD</div>
-        </div>
+        <div class="mc mc-1"><div class="dot"></div></div>
+        <div class="mc mc-2"><div class="dot"></div></div>
+        <div class="mc-core">GB<br>FOOD</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVIÇOS -->
 <section class="services" id="servicos">
   <div class="container">
-    <p class="section-label">Nossos Serviços</p>
-    <h2 class="section-title">O que a <span class="red"><strong>GB Food</strong></span><br>entrega</h2>
-    <div class="services-grid">
+    <div class="services-title">
+      <span class="label">Nossos Serviços</span>
+      <h2 class="title">O que a <span class="accent"><strong>GB Food</strong></span><br>entrega</h2>
+    </div>
+    <div class="service-cards">
       <div class="service-card">
         <div class="service-num">01</div>
-        <div class="service-title">Mídia<br><span class="red">Paga</span></div>
+        <div class="service-name">Mídia<br><span class="accent">Paga</span></div>
         <p class="service-desc">Gestão dos seus anúncios no Meta e Google para atrair clientes com previsibilidade e escala.</p>
-        <div class="service-tags">
+        <div class="tags">
           <span class="tag">Meta Ads</span>
           <span class="tag">Google Ads</span>
           <span class="tag">Redes Sociais</span>
@@ -731,9 +305,9 @@
       </div>
       <div class="service-card">
         <div class="service-num">02</div>
-        <div class="service-title">CRM +<br><span class="red">Relacionamento</span></div>
+        <div class="service-name">CRM +<br><span class="accent">Relacionamento</span></div>
         <p class="service-desc">Entenda seu cliente e envie ofertas certas na hora exata — fazendo ele comprar mais e voltar sempre.</p>
-        <div class="service-tags">
+        <div class="tags">
           <span class="tag">Dados do cliente</span>
           <span class="tag">Oferta certa</span>
           <span class="tag">Recorrência real</span>
@@ -741,9 +315,9 @@
       </div>
       <div class="service-card">
         <div class="service-num">03</div>
-        <div class="service-title">Cardápio<br><span class="red">Digital</span></div>
+        <div class="service-name">Cardápio<br><span class="accent">Digital</span></div>
         <p class="service-desc">Um cardápio estratégico que guia a decisão, valoriza seus produtos e aumenta o valor do pedido automaticamente.</p>
-        <div class="service-tags">
+        <div class="tags">
           <span class="tag">Campeões de venda</span>
           <span class="tag">Upgrades</span>
           <span class="tag">Mais lucro</span>
@@ -753,61 +327,56 @@
   </div>
 </section>
 
-<!-- MÉTRICAS -->
-<section class="metrics" id="resultados">
+<section class="results" id="resultados">
   <div class="container">
-    <div class="metrics-inner">
-      <div class="metrics-text">
-        <p class="section-label">Performance</p>
-        <h2 class="section-title">Resultados que<br><span class="red"><strong>aparecem</strong></span></h2>
-        <p>Cada real investido em mídia paga é monitorado. Acompanhamos alcance, impressões, conversão e ROAS para garantir crescimento previsível e consistente.</p>
+    <div class="results-inner">
+      <div>
+        <span class="label">Performance</span>
+        <div class="results-title">
+          <h2 class="title">Resultados que<br><span class="accent"><strong>aparecem</strong></span></h2>
+        </div>
+        <p class="results-desc">Cada real investido é monitorado. Acompanhamos alcance, impressões, conversão e ROAS para garantir crescimento previsível e consistente.</p>
       </div>
       <div class="bars">
         <div class="bar-row">
-          <span class="bar-label">Alcance</span>
+          <div class="bar-meta"><span class="bar-lbl">Alcance</span><span class="bar-pct">92%</span></div>
           <div class="bar-track"><div class="bar-fill" style="width:92%;animation-delay:0.1s"></div></div>
-          <span class="bar-pct">92%</span>
         </div>
         <div class="bar-row">
-          <span class="bar-label">Impressão</span>
-          <div class="bar-track"><div class="bar-fill" style="width:80%;animation-delay:0.2s"></div></div>
-          <span class="bar-pct">80%</span>
+          <div class="bar-meta"><span class="bar-lbl">Impressão</span><span class="bar-pct">80%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:80%;animation-delay:0.25s"></div></div>
         </div>
         <div class="bar-row">
-          <span class="bar-label">Conversão</span>
-          <div class="bar-track"><div class="bar-fill" style="width:67%;animation-delay:0.3s"></div></div>
-          <span class="bar-pct">67%</span>
+          <div class="bar-meta"><span class="bar-lbl">Conversão</span><span class="bar-pct">67%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:67%;animation-delay:0.4s"></div></div>
         </div>
         <div class="bar-row">
-          <span class="bar-label">ROAS</span>
-          <div class="bar-track"><div class="bar-fill" style="width:96%;animation-delay:0.4s"></div></div>
-          <span class="bar-pct">96%</span>
+          <div class="bar-meta"><span class="bar-lbl">ROAS</span><span class="bar-pct">96%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:96%;animation-delay:0.55s"></div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section" id="contato">
+<section class="cta-final" id="contato">
   <div class="cta-glow"></div>
-  <div style="position:relative;z-index:1;">
+  <div class="cta-inner">
     <div class="cta-badge">Faturamento acima de</div>
-    <h2 class="section-title" style="font-family:'Montserrat',sans-serif;font-weight:300;font-size:clamp(3rem,9vw,7rem);max-width:700px;margin:0 auto 0.3rem;line-height:1.0;letter-spacing:-0.02em;"><strong>Bata</strong> recordes de</h2>
-    <span class="cta-value">R$70MIL/MÊS</span>
-    <p class="cta-sub">Seu restaurante já fatura mais de R$70 mil por mês e quer escalar? A GB Food é o parceiro estratégico que você precisa.</p>
-    <div class="cta-actions">
-      <a href="https://instagram.com/gbfood.ag" target="_blank" class="btn-big">Fale com a GB Food</a>
-      <span class="cta-hint">Nos chame no <strong>Direct</strong> agora</span>
+    <p class="cta-pre"><strong>Bata</strong> recordes de</p>
+    <span class="cta-value">R$70MIL<br>/MÊS</span>
+    <p class="cta-sub">Seu restaurante já fatura mais de R$70 mil por mês e quer bater recordes de vendas? A GB Food é o parceiro estratégico que você precisa.</p>
+    <div class="cta-btns">
+      <a href="https://instagram.com/gbfood.ag" target="_blank" rel="noopener" class="btn btn-red btn-xl btn-full">Fale com a GB Food</a>
     </div>
+    <p class="cta-hint">Nos chame no <strong>Direct</strong> agora</p>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">GB <span>Food</span></div>
+  <div class="footer-logo">GB <span class="food">Food</span></div>
   <span class="footer-copy">© 2025 GB Food — Todos os direitos reservados</span>
-  <span class="footer-tagline">Marketing Gastronômico</span>
+  <span class="footer-tag">Marketing Gastronômico</span>
 </footer>
 
 </body>
